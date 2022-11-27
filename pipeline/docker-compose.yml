@@ -1,0 +1,75 @@
+version: '3.7'
+
+networks:
+  sensehawk-assignment:
+
+services:
+
+  watcher_service:
+    build:
+      context: watcher
+      dockerfile: Dockerfile
+    container_name: watcher
+    volumes:
+      - ./data/monitored_dataset:/app/monitored_dataset:rw
+      - ./data/mlflow/:/app/mlflow/:rw
+      - ./data/mlflow/mlruns:/app/mlruns/:rw
+      - ./data/prefect/:/app/prefect/:rw
+      - ./data/saved-model/:/app/saved-model/:rw
+      - ./data/state/:/app/state/:rw
+    networks:
+      - sensehawk-assignment
+    environment:
+      MAX_IMAGE_WAIT: 4
+      PREFECT_HOME: "/app/prefect/"
+
+  prefect_ui_service:
+    build:
+      context: prefect
+      dockerfile: Dockerfile
+    container_name: prefect
+    command: prefect orion start --host=0.0.0.0
+    volumes:
+      - ./data/prefect/:/app/prefect/:rw
+    networks:
+      - sensehawk-assignment
+    #    depends_on:
+    #      - watcher_service
+    ports:
+      - "4200:4200"
+    environment:
+      PREFECT_HOME: "/app/prefect/"
+
+  mlflow_ui_service:
+    build:
+      context: mlflow
+      dockerfile: Dockerfile
+    container_name: mlflow
+    networks:
+      - sensehawk-assignment
+    ports:
+      - "5000:5000"
+#    depends_on:
+#      - watcher_service
+    volumes:
+      - ./data/mlflow/:/app/mlflow/:rw
+      - ./data/mlflow/mlruns:/app/mlruns/:rw
+    command: mlflow ui --backend-store-uri sqlite:////app/mlflow/mlflow.db --default-artifact-root /app/mlflow/mlruns -h 0.0.0.0
+
+  prediction_service:
+    build:
+      context: webserver
+      dockerfile: Dockerfile
+    container_name: prediction_server
+#    depends_on:
+#      - watcher_service
+#      - mlflow_ui_service
+#      - prefect_ui_service
+    volumes:
+      - ./data:/app/data/
+    environment:
+      RUN_ID: "2f5413151de34a28941f3f0dfe028661"
+    ports:
+      - "9696:9696"
+    networks:
+      - sensehawk-assignment
