@@ -5,6 +5,7 @@ pipeline/data/
 saved-model/
 mlops assignment.pdf
 mnist_test.csv
+MLOps_Assessment.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
