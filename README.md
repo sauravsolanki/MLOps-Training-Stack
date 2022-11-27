@@ -1,9 +1,9 @@
-# Assignment: Continues Training of Mnisit Digits
+# Continues Training of Mnist Digits
 
 ## Description
-This repo has been created to submit assignment with objectives:
+This repo has been created to serve the objectives:
 1. Image Dataset: Create Dataset from the csv and store them in directories under `dataset`. Directory Structure will look like as shown below and each directory will contain  `~1000 images`
-2. a Classification MLOps Pipeline: The pipeline should automatically retrain a new classification model as soon as there are `significant changes` in dataset. `significant changes` when the changes in files of a label is more than 200.
+2. Classification MLOps Pipeline: The pipeline should automatically retrain a new classification model as soon as there are `significant changes` in dataset. `significant changes` when the changes in files of a label is more than 200.
 
 ## Flow/Diagram
 ![image](docs/image/img.png)
