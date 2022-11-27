@@ -11,12 +11,23 @@ from trainer_mlflow import train_model
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S')
-
+def create_folder(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
 
 class Watcher:
     def __init__(self, path):
         self.observer = Observer()
         self.path = path
+
+        # create the folder
+        create_folder("./data/dataset")
+        create_folder("./data/mlflow/mlruns")
+        create_folder("./data/prefect")
+        create_folder("./data/state")
+        create_folder("./data/saved-model")
+        create_folder("./data/monitored_dataset")
+
 
     def run(self):
         logger_handler = LoggingEventHandler()
