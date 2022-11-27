@@ -33,8 +33,8 @@ services:
       - ./data/prefect/:/app/prefect/:rw
     networks:
       - sensehawk-assignment
-    #    depends_on:
-    #      - watcher_service
+    depends_on:
+      - watcher_service
     ports:
       - "4200:4200"
     environment:
@@ -49,8 +49,8 @@ services:
       - sensehawk-assignment
     ports:
       - "5000:5000"
-#    depends_on:
-#      - watcher_service
+    depends_on:
+      - watcher_service
     volumes:
       - ./data/mlflow/:/app/mlflow/:rw
       - ./data/mlflow/mlruns:/app/mlruns/:rw
@@ -61,12 +61,12 @@ services:
       context: webserver
       dockerfile: Dockerfile
     container_name: prediction_server
-#    depends_on:
-#      - watcher_service
-#      - mlflow_ui_service
-#      - prefect_ui_service
+    depends_on:
+      - watcher_service
+      - mlflow_ui_service
+      - prefect_ui_service
     volumes:
-      - ./data:/app/data/
+      - ./data/mlflow:/app/mlflow
     environment:
       RUN_ID: "2f5413151de34a28941f3f0dfe028661"
     ports:
