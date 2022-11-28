@@ -20,7 +20,7 @@ services:
     networks:
       - sensehawk-assignment
     environment:
-      MAX_IMAGE_WAIT: 4
+      MAX_IMAGE_WAIT: 200
       PREFECT_HOME: "/app/prefect/"
 
   prefect_ui_service:
