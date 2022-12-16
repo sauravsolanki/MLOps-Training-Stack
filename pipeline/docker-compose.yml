@@ -1,7 +1,7 @@
 version: '3.7'
 
 networks:
-  sensehawk-assignment:
+  mlops-train-stack:
 
 services:
 
@@ -18,7 +18,7 @@ services:
       - ./data/saved-model/:/app/saved-model/:rw
       - ./data/state/:/app/state/:rw
     networks:
-      - sensehawk-assignment
+      - mlops-train-stack
     environment:
       MAX_IMAGE_WAIT: 200
       PREFECT_HOME: "/app/prefect/"
@@ -32,7 +32,7 @@ services:
     volumes:
       - ./data/prefect/:/app/prefect/:rw
     networks:
-      - sensehawk-assignment
+      - mlops-train-stack
     depends_on:
       - watcher_service
     ports:
@@ -46,7 +46,7 @@ services:
       dockerfile: Dockerfile
     container_name: mlflow
     networks:
-      - sensehawk-assignment
+      - mlops-train-stack
     ports:
       - "5000:5000"
     depends_on:
@@ -72,4 +72,4 @@ services:
     ports:
       - "9696:9696"
     networks:
-      - sensehawk-assignment
+      - mlops-train-stack
