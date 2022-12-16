@@ -52,7 +52,7 @@ class DatasetFolderHandler(FileSystemEventHandler):
     def on_any_event(event):
         # if event.is_directory:
         #     return None
-        # [Sun Nov 27 15:18:38 2022] noticed: [modified] on: [/home/saurav/Downloads/mlops assignment/monitored_dataset/0]
+        # [Sun Nov 27 15:18:38 2022] noticed: [modified] on: [/home/saurav/Downloads/mlops/monitored_dataset/0]
         print(
             "[{}] noticed: [{}] on: [{}] ".format(
                 time.asctime(), event.event_type, event.src_path
