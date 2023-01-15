@@ -1,5 +1,7 @@
 # Continues Training of Mnist Digits
 
+![Tests](https://github.com/sauravsolanki/MLOps-Training-Stack/actions/workflows/jobs.yml/badge.svg)
+
 ## Description
 This repo has been created to serve the objectives:
 1. Image Dataset: Create Dataset from the csv and store them in directories under `dataset`. Directory Structure will look like as shown below and each directory will contain  `~1000 images`
@@ -10,12 +12,16 @@ This repo has been created to serve the objectives:
 
 
 ## Improvements
+- [X] CI/CD Infrastructure
+- [X] pre-commit hooks
+- [X] pylint
 - [ ] Async Data sources process
 - [ ] Integration with AWS Cloud
-- [ ] Kubernatives
-- [ ] Watcher with timer: 5 min
-- [ ] CI/CD Pipeline, TerraForm, pre-commit hooks, pylint
-- [ ] Better Code Architecture Refractor Code 
+- [ ] Kubernetes
+- [ ] isort failing
+- [ ] multiple python version in tox
+- [ ] TerraForm as IaaC
+- [ ] Better Code Architecture Refactor Code
 - [ ] Github Actions Integration and Issues Templates
 - [ ] Model Serving in different hardware: raspberry pi, Android, javascript, onnx, tflite
 - [ ] Documentations
@@ -36,7 +42,7 @@ This repo has been created to serve the objectives:
 
 `pipeline/data`: represent volumes used between containers
 
-* Run the latest version of the code with Docker and Docker Compose: 
+* Run the latest version of the code with Docker and Docker Compose:
 
   `docker-compose up -d`
 
@@ -45,19 +51,19 @@ This repo has been created to serve the objectives:
 ```
 .
 ├── data # volumes that is shared among all services
-│   ├── dataset # dataset for initial base model 
-│   ├── mlflow # mlruns and .db file, mlflow tracking uri 
+│   ├── dataset # dataset for initial base model
+│   ├── mlflow # mlruns and .db file, mlflow tracking uri
 │   ├── monitored_dataset # watching this repo to track any changes in dataset
 │   ├── prefect # for prefect flow uri
-│   ├── saved-model 
+│   ├── saved-model
 │   └── state # to manage state of docker-services
-├── docker-compose.yml 
-├── mlflow/ # folder to build mlflow-server images 
-├── prefect/ # folder to build prefect-server images 
+├── docker-compose.yml
+├── mlflow/ # folder to build mlflow-server images
+├── prefect/ # folder to build prefect-server images
 ├── README.md
 ├── test.py # a python script to trigger webserver and get output
-├── watcher/ # folder to build watcher images 
-└── webserver/ # folder to build prediction server images 
+├── watcher/ # folder to build watcher images
+└── webserver/ # folder to build prediction server images
 
 84 directories, 168 files
 ```
@@ -66,7 +72,7 @@ This repo has been created to serve the objectives:
   By default, the stack exposes the following ports:
 
     <Ports>: <Service>
-    5000: MLFlow Webserver 
+    5000: MLFlow Webserver
     4200: Prefect Web Server
     9696: Prediction Server
 
