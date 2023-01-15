@@ -1,2 +1,9 @@
 pre-commit
 pytest
+flake8
+tox
+pytest
+pytest-cov
+mypy
+coverage
+types-requests

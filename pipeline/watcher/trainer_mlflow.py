@@ -5,18 +5,13 @@ from dataclasses import dataclass
 
 import numpy as np
 import mlflow
-import seaborn as sns
 import tensorflow as tf
-import matplotlib.pyplot as plt
 from prefect import flow, task
 from sklearn.metrics import (
-    ConfusionMatrixDisplay,
     f1_score,
     recall_score,
-    roc_auc_score,
     accuracy_score,
     precision_score,
-    confusion_matrix,
     cohen_kappa_score,
 )
 from tensorflow.keras import layers
