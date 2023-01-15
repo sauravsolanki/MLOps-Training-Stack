@@ -19,6 +19,7 @@ This repo has been created to serve the objectives:
 - [ ] Async Data sources process
 - [ ] Kubernetes
 - [ ] isort failing
+- [ ] Optimise req.txt
 - [ ] multiple python version in tox
 - [ ] TerraForm as IaaC
 - [ ] Better Code Architecture Refactor Code

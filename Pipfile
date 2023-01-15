@@ -16,6 +16,15 @@ requests = "*"
 
 [dev-packages]
 pylint = "==2.15.9"
+requests = "*"
+pre-commit = "*"
+pytest = "*"
+flake8 = "*"
+tox = "*"
+pytest-cov = "*"
+mypy = "*"
+coverage = "*"
+types-requests = "*"
 
 [requires]
 python_version = "3.10"
