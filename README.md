@@ -15,8 +15,8 @@ This repo has been created to serve the objectives:
 - [X] CI/CD Infrastructure
 - [X] pre-commit hooks
 - [X] pylint
-- [ ] Async Data sources process
 - [ ] Integration with AWS Cloud
+- [ ] Async Data sources process
 - [ ] Kubernetes
 - [ ] isort failing
 - [ ] multiple python version in tox
@@ -24,7 +24,8 @@ This repo has been created to serve the objectives:
 - [ ] Better Code Architecture Refactor Code
 - [ ] Github Actions Integration and Issues Templates
 - [ ] Model Serving in different hardware: raspberry pi, Android, javascript, onnx, tflite
-- [ ] Documentations
+- [ ] Auto Documentations and hosted at *.github.io
+- [ ] Add More Status batch here like code-coverage, py version, maintainability,code-style, deploy, etc
 
 
 ## Getting Started
@@ -80,10 +81,10 @@ This repo has been created to serve the objectives:
 * [Saurav Solanki](https://github.com/sauravsolanki)
 
 ## Version History
-* 0.1 : Initial Release (_**Currently**_)
+* 0.0.2 : Automation in Coding Style (_**Currently**_)
+* 0.0.1 : Initial Release
 
 ## License
-
 This project is licensed under the Saurav Solanki License - see the LICENSE.md file for details
 
 ## Acknowledgments

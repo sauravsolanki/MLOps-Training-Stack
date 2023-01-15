@@ -20,3 +20,7 @@ payload = {
 url = 'http://localhost:9696/predict'
 response = requests.post(url, json=payload)
 print(response.json())
+assert response.json() == {
+    'duration': 0.0,
+    'model_version': '2f5413151de34a28941f3f0dfe028661',
+}
