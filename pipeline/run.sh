@@ -4,11 +4,11 @@ if [[ -z "${GITHUB_ACTIONS}" ]]; then
   cd "$(dirname "$0")"
 fi
 
-pipenv run docker-compose up -d
+docker-compose up -d
 
 sleep 10
 
-python test.py
+pipenv run python test.py
 
 ERROR_CODE=$?
 
