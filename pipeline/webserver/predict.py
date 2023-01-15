@@ -1,11 +1,13 @@
-import base64
-import os
-from typing import Dict
-import mlflow
-import numpy as np
-from flask import Flask, request, jsonify
 import io
+import os
+import base64
+from typing import Dict
+
+import numpy as np
+import mlflow
 from PIL import Image
+from flask import Flask, jsonify, request
+
 
 class InferenceEngine:
     def __init__(self):
@@ -43,13 +45,9 @@ def predict_endpoint():
 
     pred = ie.predict(image)
 
-    result = {
-        'duration': pred,
-        'model_version': ie.RUN_ID
-    }
+    result = {'duration': pred, 'model_version': ie.RUN_ID}
     return jsonify(result)
 
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=9696)
-

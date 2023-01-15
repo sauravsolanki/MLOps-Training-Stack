@@ -1,23 +1,26 @@
-from typing import Dict
+import pickle
 from uuid import uuid4
+from typing import Dict
+from dataclasses import dataclass
 
+import numpy as np
 import mlflow
+import seaborn as sns
 import tensorflow as tf
-from PIL import Image
+import matplotlib.pyplot as plt
 from prefect import flow, task
+from sklearn.metrics import (
+    ConfusionMatrixDisplay,
+    f1_score,
+    recall_score,
+    roc_auc_score,
+    accuracy_score,
+    precision_score,
+    confusion_matrix,
+    cohen_kappa_score,
+)
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.metrics import Accuracy, Precision, AUC, Recall
-import numpy as np
-
-import pickle
-
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, cohen_kappa_score, roc_auc_score, \
-    confusion_matrix, ConfusionMatrixDisplay
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-from dataclasses import dataclass
 
 
 @dataclass
@@ -46,7 +49,7 @@ def get_dataset(config: Config):
         "seed": 123,
         "image_size": (config.IMAGE_HEIGHT, config.IMAGE_WIDTH),
         "batch_size": config.batch_size,
-        "color_mode": "grayscale"
+        "color_mode": "grayscale",
     }
 
     train_ds = tf.keras.utils.image_dataset_from_directory(**params)
@@ -67,17 +70,23 @@ def get_dataset(config: Config):
 
 @task
 def get_model(config: Config):
-    model = Sequential([
-        layers.Rescaling(1. / 255, input_shape=(config.IMAGE_HEIGHT, config.IMAGE_WIDTH, 1)),
-        layers.Conv2D(32, 3, padding='same', activation='relu'),
-        layers.MaxPooling2D(),
-        layers.Flatten(),
-        layers.Dense(config.num_classes)
-    ])
+    model = Sequential(
+        [
+            layers.Rescaling(
+                1.0 / 255, input_shape=(config.IMAGE_HEIGHT, config.IMAGE_WIDTH, 1)
+            ),
+            layers.Conv2D(32, 3, padding='same', activation='relu'),
+            layers.MaxPooling2D(),
+            layers.Flatten(),
+            layers.Dense(config.num_classes),
+        ]
+    )
     # [Accuracy(), Precision(), Recall(), AUC()]
-    model.compile(optimizer='adam',
-                  loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-                  metrics="accuracy")
+    model.compile(
+        optimizer='adam',
+        loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+        metrics="accuracy",
+    )
 
     model.summary()
     return model
@@ -183,10 +192,6 @@ def train_model():
         config.num_classes = len(class_names)
 
         model = get_model(config)
-        history = model.fit(
-            train_ds,
-            validation_data=val_ds,
-            epochs=config.epochs
-        )
+        history = model.fit(train_ds, validation_data=val_ds, epochs=config.epochs)
         report = get_measure_performance_report(model, test_ds)
         save_to_mlflow(model, test_ds, config, history.history, report)

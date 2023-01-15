@@ -1,19 +1,20 @@
+import pickle
 from typing import Dict
+from dataclasses import dataclass
 
 import mlflow
-from prefect import flow, task
-from prefect.task_runners import SequentialTaskRunner
 import tensorflow as tf
+from prefect import flow, task
+from sklearn.metrics import (
+    f1_score,
+    recall_score,
+    accuracy_score,
+    precision_score,
+    cohen_kappa_score,
+)
 from tensorflow.keras import layers
+from prefect.task_runners import SequentialTaskRunner
 from tensorflow.keras.models import Sequential
-import pickle
-
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, cohen_kappa_score, roc_auc_score, \
-    confusion_matrix, ConfusionMatrixDisplay
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-from dataclasses import dataclass
 
 
 @dataclass
@@ -42,7 +43,7 @@ def get_dataset(config: Config):
         "seed": 123,
         "image_size": (config.IMAGE_HEIGHT, config.IMAGE_WIDTH),
         "batch_size": config.batch_size,
-        "color_mode": "grayscale"
+        "color_mode": "grayscale",
     }
 
     train_ds = tf.keras.utils.image_dataset_from_directory(**params)
@@ -63,16 +64,22 @@ def get_dataset(config: Config):
 
 @task
 def get_model(config: Config):
-    model = Sequential([
-        layers.Rescaling(1. / 255, input_shape=(config.IMAGE_HEIGHT, config.IMAGE_WIDTH, 1)),
-        layers.Conv2D(32, 3, padding='same', activation='relu'),
-        layers.MaxPooling2D(),
-        layers.Flatten(),
-        layers.Dense(config.num_classes)
-    ])
-    model.compile(optimizer='adam',
-                  loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-                  metrics=['accuracy'])
+    model = Sequential(
+        [
+            layers.Rescaling(
+                1.0 / 255, input_shape=(config.IMAGE_HEIGHT, config.IMAGE_WIDTH, 1)
+            ),
+            layers.Conv2D(32, 3, padding='same', activation='relu'),
+            layers.MaxPooling2D(),
+            layers.Flatten(),
+            layers.Dense(config.num_classes),
+        ]
+    )
+    model.compile(
+        optimizer='adam',
+        loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+        metrics=['accuracy'],
+    )
 
     model.summary()
     return model
@@ -139,11 +146,7 @@ def main():
     config.num_classes = len(class_names)
 
     model = get_model(config)
-    history = model.fit(
-        train_ds,
-        validation_data=val_ds,
-        epochs=config.epochs
-    )
+    history = model.fit(train_ds, validation_data=val_ds, epochs=config.epochs)
 
     save_model(model, config.model_path)
     save_hist(history.history, config.dict_path)

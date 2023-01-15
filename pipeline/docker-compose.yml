@@ -54,7 +54,7 @@ services:
     volumes:
       - ./data/mlflow/:/app/mlflow/:rw
       - ./data/mlflow/mlruns:/app/mlruns/:rw
-    command: mlflow ui --backend-store-uri sqlite:////app/mlflow/mlflow.db --default-artifact-root /app/mlflow/mlruns -h 0.0.0.0
+    command: mlflow server --backend-store-uri sqlite:////app/mlflow/mlflow.db --default-artifact-root /app/mlflow/mlruns -h 0.0.0.0
 
   prediction_service:
     build:

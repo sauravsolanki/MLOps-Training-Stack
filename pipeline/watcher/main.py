@@ -1,19 +1,21 @@
-import sys
+import os
 import time
 import logging
 from collections import defaultdict
-from watchdog.observers import Observer
-from watchdog.events import LoggingEventHandler, FileSystemEventHandler
-import os
 
 from trainer_mlflow import train_model
+from watchdog.events import LoggingEventHandler, FileSystemEventHandler
+from watchdog.observers import Observer
 
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(
+    level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S'
+)
+
+
 def create_folder(path):
     if not os.path.exists(path):
         os.makedirs(path)
+
 
 class Watcher:
     def __init__(self, path):
@@ -27,7 +29,6 @@ class Watcher:
         create_folder("./data/state")
         create_folder("./data/saved-model")
         create_folder("./data/monitored_dataset")
-
 
     def run(self):
         logger_handler = LoggingEventHandler()
@@ -67,7 +68,9 @@ class DatasetFolderHandler(FileSystemEventHandler):
         changed_labeled_name = event.src_path.rsplit("/", maxsplit=1)[1]
         new_len = len(os.listdir(changed_folder_path))
 
-        if new_len - DatasetFolderHandler.dataset_state[changed_labeled_name] >= int(os.getenv("MAX_IMAGE_WAIT")):
+        if new_len - DatasetFolderHandler.dataset_state[changed_labeled_name] >= int(
+            os.getenv("MAX_IMAGE_WAIT")
+        ):
             DatasetFolderHandler.dataset_state[changed_labeled_name] = new_len
             print("Retraining Model")
             train_model()
