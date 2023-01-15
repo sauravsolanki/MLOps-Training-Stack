@@ -1,10 +1,13 @@
 name: CI-Tests
 on:
-  pull_request:
-    branches:
-      - 'develop'
-    paths:
-      - 'pipeline/**'
+  - push
+
+#on:
+#  pull_request:
+#    branches:
+#      - 'develop'
+#    paths:
+#      - 'pipeline/**'
 
 env:
   AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
