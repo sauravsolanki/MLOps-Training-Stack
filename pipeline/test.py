@@ -17,7 +17,7 @@ payload = {
     "data": image_base64_str,
 }
 
-url = 'http://localhost:9696/predict'
+url = 'http://0.0.0.0:9696/predict'
 response = requests.post(url, json=payload)
 print(response.json())
 assert response.json() == {
