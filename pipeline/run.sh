@@ -8,6 +8,8 @@ docker-compose up -d
 
 sleep 10
 
+docker-compose logs
+
 pipenv run python test.py
 
 ERROR_CODE=$?
