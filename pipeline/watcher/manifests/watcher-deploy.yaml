@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: watcher-server
+  labels:
+    app: watcher-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: watcher-server
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+  template:
+    metadata:
+      labels:
+        app: watcher-server
+    spec:
+      containers:
+        - name: watcher-server:v1
+          image: watcher-server:v1
+          envFrom:
+            - configMapRef:
+                name: watcher-configmap
+            - secretRef:
+                name: watcher-secret

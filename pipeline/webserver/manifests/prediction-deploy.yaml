@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prediction-server
+  labels:
+    app: prediction-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prediction-server
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+  template:
+    metadata:
+      labels:
+        app: prediction-server
+    spec:
+      containers:
+        - name: prediction-server:v1
+          image: prediction-server:v1
+          envFrom:
+            - configMapRef:
+                name: prediction-configmap
+            - secretRef:
+                name: prediction-secret
+          ports:
+            - containerPort: 9696
