@@ -1,12 +1,13 @@
 # project specific
-dataset/
-monitored_dataset/
 pipeline/data/*
-!pipeline/data/mlflow/*
-saved-model/
 mlops guidelines.pdf
 mnist_test.csv
 MLOps_Guidelines.ipynb
+saved-model/
+monitored_dataset/
+dataset/*
+
+temp-img/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -196,6 +197,3 @@ bundles/
 vendor/pkg/
 pyenv
 Vagrantfile
-
-
-temp-img/
