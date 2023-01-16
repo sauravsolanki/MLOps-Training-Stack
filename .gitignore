@@ -1,7 +1,8 @@
 # project specific
 dataset/
 monitored_dataset/
-pipeline/data/
+pipeline/data/*
+!pipeline/data/mlflow/*
 saved-model/
 mlops guidelines.pdf
 mnist_test.csv
