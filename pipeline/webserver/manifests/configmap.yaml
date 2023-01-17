@@ -3,5 +3,4 @@ kind: ConfigMap
 metadata:
   name: prediction-configmap
 data:
-  key1: "value1"
-  key2: "value1"
+  RUN_ID: "2f5413151de34a28941f3f0dfe028661"

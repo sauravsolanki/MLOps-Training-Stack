@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
   name: prefect-configmap
 data:
-  AUTH_SVC_ADDRESS: "auth:5000"
+  key1: "value1"
+  key2: "value1"

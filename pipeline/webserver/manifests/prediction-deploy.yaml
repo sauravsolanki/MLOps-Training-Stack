@@ -4,6 +4,7 @@ metadata:
   name: prediction-server
   labels:
     app: prediction-server
+
 spec:
   replicas: 1
   selector:
@@ -13,13 +14,14 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 3
+
   template:
     metadata:
       labels:
         app: prediction-server
     spec:
       containers:
-        - name: prediction-server:v1
+        - name: prediction-server
           image: prediction-server:v1
           envFrom:
             - configMapRef:
@@ -28,3 +30,11 @@ spec:
                 name: prediction-secret
           ports:
             - containerPort: 9696
+          volumeMounts:
+            - name: mlflow-data
+              mountPath: /app/mlflow/
+
+      volumes:
+        - name: mlflow-data
+          hostPath:
+            path: ./data/mlflow
