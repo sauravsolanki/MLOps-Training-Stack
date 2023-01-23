@@ -1,14 +1,37 @@
-# Continues Training of Mnist Digits
+# MLOps-Level-4 Infrastructure Code
 
-![Tests](https://github.com/sauravsolanki/MLOps-Training-Stack/actions/workflows/jobs.yml/badge.svg)
+With increasing demand of EdgeAI or ML in practices, this repo aims to bring high level of automation in MLOps Life cycle. This will help to set up Level-4 MLOps Infrastructure and solve lots of real world problems around.
+
+It comes with best practices in Software Design and Architecture for ML like testing, CI/CD, Kubernetes, Github workflow and Terraform + AWS Services.
+
+[//]: # (It has been created to Open Source Solution for non-commercial use cases only.)
+
+Read More about [MLOps Maturity Level here](https://learn.microsoft.com/en-us/azure/architecture/example-scenario/mlops/mlops-maturity-model)
+
+![Tests](https://github.com/sauravsolanki/mlops/actions/workflows/jobs.yml/badge.svg)
 
 ## Description
-This repo has been created to serve the objectives:
+Currently, it is serving the following objectives:
 1. Image Dataset: Create Dataset from the csv and store them in directories under `dataset`. Directory Structure will look like as shown below and each directory will contain  `~1000 images`
-2. Classification MLOps Pipeline: The pipeline should automatically retrain a new classification model as soon as there are `significant changes` in dataset. `significant changes` when the changes in files of a label is more than 200.
+2. Classification MLOps Pipeline: The pipeline should automatically retrain a new classification model as soon as there are `significant changes` in dataset. `significant changes` here is  the changes in files of a label is more than 200.
 
 ## Flow/Diagram
 ![image](docs/image/img.png)
+
+
+### Show me Working Images !
+1. `pipeline/ec2/*.jpg`: Replicating complete Infrastructure in AWS EC2 using docker-compose.
+
+    * Images show ec2-setup, security-group,setting up code and complete config view
+    * Lastly, test.py to get the prediction.
+    [Check the images here](./pipeline/ec2/).
+
+2. `pipeline/webserver/serverless/*.jpg`: to showcase the deployment of Inference Server in Serverless computing
+
+    * Images show API Gateway, security-group, setting up ECR and using Lambda to server container
+    * It shows complete AWS config view.
+    * Lastly, test.py to get the prediction
+    * [Check the images here](./pipeline/webserver/serverless/img).
 
 
 ## Improvements
@@ -43,21 +66,6 @@ This repo has been created to serve the objectives:
 - [ ] Add More Status batch here like code-coverage, py version, maintainability,code-style, deploy, etc
 
 ## Getting Started
-
-### View Working Images
-1. `pipeline/ec2/*.jpg`: Replicating complete Infrastructure in AWS EC2 using docker-compose.
-
-    * Images show ec2-setup, security-group,setting up code and complete config view
-    * Lastly, test.py to get the prediction.
-    [Check the images here](./pipeline/ec2/).
-
-2. `pipeline/webserver/serverless/*.jpg`: to showcase the deployment of Inference Server in Serverless computing
-
-    * Images show API Gateway, security-group, setting up ECR and using Lambda to server container
-    * It shows complete AWS config view.
-    * Lastly, test.py to get the prediction
-    * [Check the images here](./pipeline/webserver/serverless/img).
-
 
 
 ### Dependencies
