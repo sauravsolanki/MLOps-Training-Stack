@@ -56,7 +56,7 @@ This repo has been created to serve the objectives:
     * Images show API Gateway, security-group, setting up ECR and using Lambda to server container
     * It shows complete AWS config view.
     * Lastly, test.py to get the prediction
-    * [Check the images here](./pipeline/webserver/serverless/).
+    * [Check the images here](./pipeline/webserver/serverless/img).
 
 
 
