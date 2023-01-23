@@ -8,6 +8,8 @@ monitored_dataset/
 dataset/*
 
 temp-img/
+pipeline/webserver/serverless/run.sh
+mlruns/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

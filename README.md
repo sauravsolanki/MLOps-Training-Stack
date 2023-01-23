@@ -12,24 +12,53 @@ This repo has been created to serve the objectives:
 
 
 ## Improvements
+
+### Minor Changes (in current release)
 - [X] CI/CD Infrastructure
+- [X] Github Job Flags
 - [X] pre-commit hooks
+- [X] tox
 - [X] pylint
-- [ ] Integration with AWS Cloud
-- [ ] Async Data sources process
+- [X] Integration with AWS Cloud
+- [X] AWS Serverless: API Gateway + Lambda
+- [X] AWS EC2: Docker-compose
+- [X] Github Issues Templates
 - [ ] Kubernetes
 - [ ] isort failing
 - [ ] Optimise req.txt
 - [ ] multiple python version in tox
-- [ ] TerraForm as IaaC
-- [ ] Better Code Architecture Refactor Code
-- [ ] Github Actions Integration and Issues Templates
+- [ ] Add TerraForm as base IaaC
+- [ ] make a Video
+
+
+### Upcoming Major Changes (in next release)
+- [ ] Multi Input Data sources via Kafka, MQTT and AWS Kinesis.
+- [ ] Data Validation
+- [ ] Model Validation
+- [ ] Deployment Validation
+- [ ] Async Task Handling in Redis
+- [ ] Robust CI/CD/CTraining/CDeployment Pipeline
 - [ ] Model Serving in different hardware: raspberry pi, Android, javascript, onnx, tflite
 - [ ] Auto Documentations and hosted at *.github.io
 - [ ] Add More Status batch here like code-coverage, py version, maintainability,code-style, deploy, etc
 
-
 ## Getting Started
+
+### View Working Images
+1. `pipeline/ec2/*.jpg`: Replicating complete Infrastructure in AWS EC2 using docker-compose.
+
+    * Images show ec2-setup, security-group,setting up code and complete config view
+    * Lastly, test.py to get the prediction.
+    [Check the images here](./pipeline/ec2/).
+
+2. `pipeline/webserver/serverless/*.jpg`: to showcase the deployment of Inference Server in Serverless computing
+
+    * Images show API Gateway, security-group, setting up ECR and using Lambda to server container
+    * It shows complete AWS config view.
+    * Lastly, test.py to get the prediction
+    * [Check the images here](./pipeline/webserver/serverless/).
+
+
 
 ### Dependencies
 

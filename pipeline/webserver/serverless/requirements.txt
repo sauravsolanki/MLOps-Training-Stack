@@ -1,0 +1,6 @@
+mlflow==1.30.0
+tensorflow==2.8.2
+prefect==2.6.9
+scikit-learn
+pillow
+matplotlib
