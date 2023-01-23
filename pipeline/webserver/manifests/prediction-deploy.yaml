@@ -22,12 +22,12 @@ spec:
     spec:
       containers:
         - name: prediction-server
-          image: prediction-server:v1
-          envFrom:
-            - configMapRef:
-                name: prediction-configmap
-            - secretRef:
-                name: prediction-secret
+          image: prediction-server:stand-alone
+          env:
+          - name: RUN_ID
+            value: "2f5413151de34a28941f3f0dfe028661"
+          - name: AWS_DEFAULT_REGION
+            value: "ap-south-1"
           ports:
             - containerPort: 9696
           volumeMounts:
@@ -37,4 +37,4 @@ spec:
       volumes:
         - name: mlflow-data
           hostPath:
-            path: ./data/mlflow
+            path: /home/saurav/Documents/Branding/mlops-4/pipeline/data/mlflow

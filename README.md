@@ -34,6 +34,13 @@ Currently, it is serving the following objectives:
     * Lastly, test.py to get the prediction
     * [Check the images here](./pipeline/webserver/serverless/img).
 
+3. Kubernetes (_in Progress_*): `pipeline/webserver/manifests/`: to showcase the deployment of Inference Server in Kubernetes Cluster
+
+    * Images show Service and Deployment Stack, Config and Env Map, and port-forward to `9696`
+    * It shows Kubernetes.
+    * Lastly, test.py to get the prediction
+    * [Check the images here](pipeline/webserver/manifests/img/).
+
 
 ## Improvements
 
@@ -47,7 +54,7 @@ Currently, it is serving the following objectives:
 - [X] AWS Serverless: API Gateway + Lambda
 - [X] AWS EC2: Docker-compose
 - [X] Github Issues Templates
-- [ ] Kubernetes
+- [X] Kubernetes* (in progress ...)
 - [ ] isort failing
 - [ ] Optimise req.txt
 - [ ] multiple python version in tox
