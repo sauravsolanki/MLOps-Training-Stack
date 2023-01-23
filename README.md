@@ -24,7 +24,8 @@ Currently, it is serving the following objectives:
 
     * Images show ec2-setup, security-group,setting up code and complete config view
     * Lastly, test.py to get the prediction.
-    [Check the images here](./pipeline/ec2/).
+    * [Check the images here](./pipeline/ec2/).
+
 
 2. `pipeline/webserver/serverless/*.jpg`: to showcase the deployment of Inference Server in Serverless computing
 
